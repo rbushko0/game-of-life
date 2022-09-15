@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "xjjhUfRA3uL3KBYLXe8KHzk4okulDkbNMGbR1iQUlrsUHsdLJesqtX285/1lNrRCWI3gkYxQgfZtKHZqt1E9ng==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Rebecca\\source\\repos\\GameOfLife\\GameOfLife\\GameOfLife.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Rebecca\\.nuget\\packages\\sayers.sdl2.core\\1.0.11\\sayers.sdl2.core.1.0.11.nupkg.sha512",
+    "C:\\Users\\Rebecca\\.nuget\\packages\\sdl\\1.2.15.16\\sdl.1.2.15.16.nupkg.sha512",
+    "C:\\Users\\Rebecca\\.nuget\\packages\\sdl.redist\\1.2.15.16\\sdl.redist.1.2.15.16.nupkg.sha512"
+  ],
+  "logs": []
+}

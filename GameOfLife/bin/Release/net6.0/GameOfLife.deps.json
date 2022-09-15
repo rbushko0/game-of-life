@@ -1,0 +1,62 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "GameOfLife/1.0.0": {
+        "dependencies": {
+          "SDL": "1.2.15.16",
+          "Sayers.SDL2.Core": "1.0.11"
+        },
+        "runtime": {
+          "GameOfLife.dll": {}
+        }
+      },
+      "Sayers.SDL2.Core/1.0.11": {
+        "runtime": {
+          "lib/net6.0/Sayers.SDL2.Core.dll": {
+            "assemblyVersion": "1.0.11.0",
+            "fileVersion": "1.0.11.0"
+          }
+        }
+      },
+      "SDL/1.2.15.16": {
+        "dependencies": {
+          "SDL.redist": "1.2.15.16"
+        }
+      },
+      "SDL.redist/1.2.15.16": {}
+    }
+  },
+  "libraries": {
+    "GameOfLife/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Sayers.SDL2.Core/1.0.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-K/guGaUyRdMhL2FLlUYbqJmKF3h2KtOV7l90NJfLOt/M64zLb4fkWlDGjXCZdHSZGPKsyOjps6FdsambXiLJQQ==",
+      "path": "sayers.sdl2.core/1.0.11",
+      "hashPath": "sayers.sdl2.core.1.0.11.nupkg.sha512"
+    },
+    "SDL/1.2.15.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-w8YAgNk/1SFka120Ib7rW4s+BmloHEbKRuDWflnxDA6vjBFm3muaCKmXfkrCwjbx9TZ1TJEK3eU2FlMoqaKbLw==",
+      "path": "sdl/1.2.15.16",
+      "hashPath": "sdl.1.2.15.16.nupkg.sha512"
+    },
+    "SDL.redist/1.2.15.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-F8a3FMAhHJ/o1WcpkNRxDhFqaFKaZJZs2p+jHaVIPPaGnjfew/ka1ckhGKCALj6ZJfX5qIbdo6EiY8n/NvxO2Q==",
+      "path": "sdl.redist/1.2.15.16",
+      "hashPath": "sdl.redist.1.2.15.16.nupkg.sha512"
+    }
+  }
+}
