@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rebecca\\source\\repos\\GameOfLife\\GameOfLife\\GameOfLife.csproj": {}
+    "C:\\Users\\Rebecca\\Documents\\game-of-life\\GameOfLife\\GameOfLife.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rebecca\\source\\repos\\GameOfLife\\GameOfLife\\GameOfLife.csproj": {
+    "C:\\Users\\Rebecca\\Documents\\game-of-life\\GameOfLife\\GameOfLife.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rebecca\\source\\repos\\GameOfLife\\GameOfLife\\GameOfLife.csproj",
+        "projectUniqueName": "C:\\Users\\Rebecca\\Documents\\game-of-life\\GameOfLife\\GameOfLife.csproj",
         "projectName": "GameOfLife",
-        "projectPath": "C:\\Users\\Rebecca\\source\\repos\\GameOfLife\\GameOfLife\\GameOfLife.csproj",
+        "projectPath": "C:\\Users\\Rebecca\\Documents\\game-of-life\\GameOfLife\\GameOfLife.csproj",
         "packagesPath": "C:\\Users\\Rebecca\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rebecca\\source\\repos\\GameOfLife\\GameOfLife\\obj\\",
+        "outputPath": "C:\\Users\\Rebecca\\Documents\\game-of-life\\GameOfLife\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

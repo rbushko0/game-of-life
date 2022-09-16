@@ -224,7 +224,7 @@ namespace RebeccaBushko.GameOfLife
 
             foreach (Cell cell in simulation.GetCells())
             {
-                if (cell.IsAlive)
+                if (cell.State == CellState.ALIVE)
                 {
                     DrawAlive((int) cell.Y, (int) cell.X);
                 }

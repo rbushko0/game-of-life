@@ -9,12 +9,12 @@ namespace RebeccaBushko.GameOfLife
     public class QuadTreeGameOfLife
     {
         private QuadTree<Cell> grid;
-        private QuadTree<Cell> cellsToAdd;
+        private HashSet<Cell> cellsToAdd;
 
         public QuadTreeGameOfLife(List<Tuple<long, long>> initial)
         {
             grid = new QuadTree<Cell>(ulong.MaxValue, ulong.MaxValue, new CellBounds());
-            cellsToAdd = new QuadTree<Cell>(ulong.MaxValue, ulong.MaxValue, new CellBounds());
+            cellsToAdd = new HashSet<Cell>();
 
             foreach (Tuple<long, long> cell in initial)
             {
@@ -22,7 +22,7 @@ namespace RebeccaBushko.GameOfLife
                 {
                     X = (ulong) (cell.Item1 + long.MaxValue),
                     Y = (ulong) (cell.Item2 + long.MaxValue),
-                    IsAlive = true,
+                    State = CellState.ALIVE,
                 });
             }
         }
@@ -31,19 +31,24 @@ namespace RebeccaBushko.GameOfLife
         {
             foreach (Cell cell in grid.GetObjects())
             {
-                IEnumerable<Cell> nearest = grid.GetNearestObjects(cell);
-
                 SetState(cell);
                 SetNeighbors(cell);
             }
 
-            grid.InsertRange(cellsToAdd.GetObjects());
+            List<Cell> toRemove = grid.GetObjects().Where(cell => cell.State != CellState.ALIVE).ToList();
+            grid.RemoveRange(toRemove);
+
+            foreach (Cell cell in cellsToAdd)
+            {
+                cell.State = CellState.ALIVE;
+                grid.Insert(cell);
+            }
             cellsToAdd.Clear();
         }
 
         private bool AreNeighbors(Cell cell1, Cell cell2)
         {
-            if (!cell2.IsAlive)
+            if (cell2.State == CellState.DEAD)
             {
                 return false;
             }
@@ -61,115 +66,138 @@ namespace RebeccaBushko.GameOfLife
 
         private void SetNeighbors(Cell cell)
         {
-            Cell neighborTemp = new Cell();
             // top-left
             if (cell.X > ulong.MinValue && cell.Y > ulong.MinValue)
             {
-                neighborTemp.X = cell.X - 1;
-                neighborTemp.Y = cell.Y - 1;
-                SetState(neighborTemp);
+                Cell neighborTemp = new Cell()
+                {
+                    X = cell.X - 1,
+                    Y = cell.Y - 1,
+                };
+                SetState(neighborTemp, true);
             }
 
             // top-center
             if (cell.Y > ulong.MinValue)
             {
-                neighborTemp.X = cell.X;
-                neighborTemp.Y = cell.Y - 1;
-                SetState(neighborTemp);
+                Cell neighborTemp = new Cell()
+                {
+                    X = cell.X,
+                    Y = cell.Y - 1,
+                };
+                SetState(neighborTemp, true);
             }
 
             // top-right
             if (cell.X < ulong.MaxValue && cell.Y > ulong.MinValue)
             {
-                neighborTemp.X = cell.X + 1;
-                neighborTemp.Y = cell.Y - 1;
-                SetState(neighborTemp);
+                Cell neighborTemp = new Cell()
+                {
+                    X = cell.X + 1,
+                    Y = cell.Y - 1,
+                };
+                SetState(neighborTemp, true);
             }
 
             // left
             if (cell.X > ulong.MinValue)
             {
-                neighborTemp.X = cell.X - 1;
-                neighborTemp.Y = cell.Y;
-                SetState(neighborTemp);
+                Cell neighborTemp = new Cell()
+                {
+                    X = cell.X - 1,
+                    Y = cell.Y,
+                };
+                SetState(neighborTemp, true);
             }
 
             // right
             if (cell.X < ulong.MaxValue)
             {
-                neighborTemp.X = cell.X + 1;
-                neighborTemp.Y = cell.Y;
-                SetState(neighborTemp);
+                Cell neighborTemp = new Cell()
+                {
+                    X = cell.X + 1,
+                    Y = cell.Y,
+                };
+                SetState(neighborTemp, true);
             }
 
             // bottom-left
             if (cell.X > ulong.MinValue && cell.Y > ulong.MinValue)
             {
-                neighborTemp.X = cell.X - 1;
-                neighborTemp.Y = cell.Y + 1;
-                SetState(neighborTemp);
+                Cell neighborTemp = new Cell()
+                {
+                    X = cell.X - 1,
+                    Y = cell.Y + 1,
+                };
+                SetState(neighborTemp, true);
             }
 
             // bottom-center
             if (cell.Y < ulong.MaxValue)
             {
-                neighborTemp.X = cell.X;
-                neighborTemp.Y = cell.Y + 1;
-                SetState(neighborTemp);
+                Cell neighborTemp = new Cell()
+                {
+                    X = cell.X,
+                    Y = cell.Y + 1,
+                };
+                SetState(neighborTemp, true);
             }
 
             // bottom-right
             if (cell.X < ulong.MaxValue && cell.Y < ulong.MaxValue)
             {
-                neighborTemp.X = cell.X + 1;
-                neighborTemp.Y = cell.Y + 1;
-                SetState(neighborTemp);
+                Cell neighborTemp = new Cell()
+                {
+                    X = cell.X + 1,
+                    Y = cell.Y + 1,
+                };
+                SetState(neighborTemp, true);
             }
         }
         
-        private void SetState(Cell cell)
+        private void SetState(Cell cell, bool neighbor = false)
         {
             int neighborCount = 0;
             bool cellExists = false;
+            Cell cellInGrid = cell;
             foreach (Cell possibleNeighbor in grid.GetNearestObjects(cell))
             {
                 if (cell.X == possibleNeighbor.X && cell.Y == possibleNeighbor.Y)
                 {
+                    cellInGrid = possibleNeighbor;
                     cellExists = true;
                     continue;
                 }
 
-                if (AreNeighbors(cell, possibleNeighbor))
+                if (AreNeighbors(cellInGrid, possibleNeighbor))
                 {
                     neighborCount++;
                 }
             }
 
-            if (cell.IsAlive)
+            // Only check dead neighbors to see if they need to be set alive
+            if (cellExists && neighbor)
             {
-                if (neighborCount < 2 || neighborCount > 3)
-                {
-                    cell.IsAlive = false;
-                }
-                else
-                {
-                    cell.IsAlive = true;
-                }
-            }
-            else if (neighborCount == 3)
-            {
-                cell.IsAlive = true;
+                return;
             }
 
-            if (cell.IsAlive && !cellExists)
+            if (cellInGrid.State == CellState.ALIVE && neighborCount < 2 || neighborCount > 3)
             {
-                cellsToAdd.Insert(cell);
+                cellInGrid.State = CellState.DYING;
+            }
+            else if (cell.State == CellState.DEAD && neighborCount == 3)
+            {
+                cellInGrid.State = CellState.ALIVE;
+                if (!cellExists)
+                {
+                    cellsToAdd.Add(cellInGrid);
+                }
             }
         }
 
         public IEnumerable<Cell> GetCells()
         {
-            return grid.GetObjects().Where(cell => cell.IsAlive);
+            return grid.GetObjects().Where(cell => cell.State == CellState.ALIVE);
         }
         
         public void TogglePoint(ulong x, ulong y)
@@ -178,15 +206,16 @@ namespace RebeccaBushko.GameOfLife
             {
                 X = x,
                 Y = y,
-                IsAlive = true
             };
 
             if (!grid.GetObjects().Contains<Cell>(cell))
             {
+                cell.State = CellState.ALIVE;
                 grid.Insert(cell);
             }
             else
             {
+                cell.State = CellState.DEAD;
                 grid.Remove(cell);
             }
         }

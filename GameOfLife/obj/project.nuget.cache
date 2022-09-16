@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xjjhUfRA3uL3KBYLXe8KHzk4okulDkbNMGbR1iQUlrsUHsdLJesqtX285/1lNrRCWI3gkYxQgfZtKHZqt1E9ng==",
+  "dgSpecHash": "fRoXuwcrVnpMu0RZa1C+2pVB8/Pu7qelL1bXAC2EV4KCSdSzw8bV2BxW3sJTASbTiKxTMrrh0e82e34SYWaGaA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rebecca\\source\\repos\\GameOfLife\\GameOfLife\\GameOfLife.csproj",
+  "projectFilePath": "C:\\Users\\Rebecca\\Documents\\game-of-life\\GameOfLife\\GameOfLife.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rebecca\\.nuget\\packages\\sayers.sdl2.core\\1.0.11\\sayers.sdl2.core.1.0.11.nupkg.sha512",
     "C:\\Users\\Rebecca\\.nuget\\packages\\sdl\\1.2.15.16\\sdl.1.2.15.16.nupkg.sha512",
