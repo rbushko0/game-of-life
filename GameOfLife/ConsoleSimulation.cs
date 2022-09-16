@@ -15,7 +15,7 @@ namespace GameOfLife
         public void Run()
         {
             Console.WriteLine();
-            Console.WriteLine("Enter coordinates in line-by-line in (X,Y) format.");
+            Console.WriteLine("Enter coordinates in line-by-line in (X,Y) format. Press Enter twice to finish.");
             List<Tuple<long, long>> liveCells = new List<Tuple<long, long>>();
 
             bool readingInput = true;

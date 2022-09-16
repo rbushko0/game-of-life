@@ -32,15 +32,9 @@ namespace RebeccaBushko.GameOfLife
             foreach (Cell cell in grid.GetObjects())
             {
                 SetState(cell);
-                Console.WriteLine();
-                foreach (Cell cell2 in grid.GetNearestObjects(cell))
-                {
-                    Console.Write($"({cell2.X},{cell2.Y},{cell2.State})");
-                }
                 SetNeighbors(cell);
             }
 
-            Console.WriteLine();
             List<Cell> toRemove = grid.GetObjects().Where(cell => cell.State != CellState.ALIVE).ToList();
             grid.RemoveRange(toRemove);
 
