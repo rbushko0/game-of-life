@@ -21,5 +21,10 @@ namespace RebeccaBushko.GameOfLife
 
             return this.X == ((Cell)obj).X && this.Y == ((Cell)obj).Y;
         }
+
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() ^ Y.GetHashCode();
+        }
     }
 }
